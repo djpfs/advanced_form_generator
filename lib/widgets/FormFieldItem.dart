@@ -40,7 +40,7 @@ class FormFieldItem extends StatelessWidget {
       this.obscureText = false,
       this.maxLength,
       this.validator,
-      this.error = '',
+      this.error,
       this.icon,
       this.initialValue,
       this.inputFormatters,
