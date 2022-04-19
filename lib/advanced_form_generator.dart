@@ -21,6 +21,7 @@ class AdvancedFormGenerator {
     if (field is FormFieldItem) {
       _form[_fieldPrefix + field.mapKey] =
           TextEditingController(text: field.initialValue);
+      field.controller = _form[_fieldPrefix + field.mapKey];
     } else if (field is FormSection) {
       _form[_sectionPrefix + _qtdItems.toString()] = field;
     } else {
