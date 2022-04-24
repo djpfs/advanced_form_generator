@@ -38,7 +38,7 @@ InputDecoration defaultInputDecotation(
     fillColor: fillColor ?? const Color(0xFFF2F3F5),
     enabled: enabled,
     floatingLabelAlignment: floatingLabelAlignment,
-    floatingLabelBehavior: floatingLabelBehavior,
+    floatingLabelBehavior: FloatingLabelBehavior.always,
     floatingLabelStyle: floatingLabelStyle ??
         const TextStyle(
           color: Colors.black87,

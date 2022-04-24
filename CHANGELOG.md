@@ -1,3 +1,7 @@
+## 0.0.3
+
+- Fixed Importing Default InputDecoration
+
 ## 0.0.2
 
 - Removed join function
