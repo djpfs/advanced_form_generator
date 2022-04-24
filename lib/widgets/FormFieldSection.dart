@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FormSection extends StatelessWidget {
+class FormFieldSection extends StatelessWidget {
   final String title;
   final double height;
-  const FormSection({Key? key, required this.title, this.height = 45.0})
+  const FormFieldSection({Key? key, required this.title, this.height = 45.0})
       : super(key: key);
 
   @override

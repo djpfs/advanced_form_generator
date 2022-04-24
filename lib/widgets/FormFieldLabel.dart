@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomLabel extends StatelessWidget {
+class FormFieldLabel extends StatelessWidget {
   final String text;
   final bool isUpper;
   final double fontSize;
@@ -8,7 +8,7 @@ class CustomLabel extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
 
-  const CustomLabel(
+  const FormFieldLabel(
       {Key? key,
       required this.text,
       this.isUpper = true,

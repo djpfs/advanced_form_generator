@@ -1,7 +1,45 @@
 import 'package:advanced_form_generator/widgets/FormFieldItem.dart';
+import 'package:advanced_form_generator/widgets/FormFieldSection.dart';
 import 'package:advanced_form_generator/advanced_form_generator.dart';
-import 'package:advanced_form_generator/widgets/FormSection.dart';
+import 'package:advanced_form_generator/widgets/IFormFieldItem.dart';
 import 'package:flutter/material.dart';
+
+class CustomText extends StatelessWidget implements IFormFieldItem {
+  @override
+  TextEditingController? controller;
+
+  @override
+  String? initialValue;
+  @override
+  String mapKey;
+
+  @override
+  InputDecoration? decoration;
+
+  @override
+  String label;
+
+  CustomText({
+    Key? key,
+    this.controller,
+    this.initialValue,
+    this.hint,
+    required this.label,
+    required this.mapKey,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: decoration,
+      style: TextStyle(fontSize: 18, color: Colors.grey[900]),
+    );
+  }
+
+  @override
+  String? hint;
+}
 
 void main() {
   runApp(const MyApp());
@@ -39,34 +77,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    formGenerator = AdvancedFormGenerator([
-      FormFieldItem(
-        label: 'Nome completo',
-        required: true,
-        mapKey: 'name',
-      ),
-      FormFieldItem(
-        label: 'E-mail',
-        mapKey: 'email',
-        required: true,
-        validator: (String? value, bool? item) {
-          if (value == null || value.isEmpty) {
-            return 'E-mail é obrigatório';
-          }
-          return null;
-        },
-      ),
-      const FormSection(title: 'Segurança'),
-      FormFieldItem(
-        label: 'Senha',
-        mapKey: 'password',
-      ),
-      FormFieldItem(
-        label: 'Confirmar senha',
-        mapKey: 'passwordConfirm',
-        obscureText: true,
-      ),
-    ]);
+    formGenerator = AdvancedFormGenerator(
+      inputs: [
+        FormFieldItem(
+          label: 'Name',
+          required: true,
+          mapKey: 'name',
+        ),
+        FormFieldItem(
+          label: 'E-mail',
+          mapKey: 'email',
+          required: true,
+          validator: (String? value) {
+            if (value == null || value.isEmpty) {
+              return 'E-mail is required';
+            }
+            return null;
+          },
+        ),
+
+        /// Example of a custom widget
+        const FormFieldSection(title: 'Security section'),
+
+        FormFieldItem(
+          label: 'Password',
+          mapKey: 'password',
+          obscureText: true,
+          required: true,
+        ),
+        FormFieldItem(
+          label: 'Password Confirmation',
+          mapKey: 'passwordConfirm',
+          obscureText: true,
+          required: true,
+        ),
+        CustomText(
+          mapKey: 'custom',
+          label: 'Custom Text Field',
+        ),
+      ],
+    );
     super.initState();
   }
 

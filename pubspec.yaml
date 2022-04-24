@@ -1,6 +1,6 @@
 name: advanced_form_generator
 description: Use uma estrutura simples e facil para criar formulários
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/djpfs/advanced_form_generator.git
 
 environment:

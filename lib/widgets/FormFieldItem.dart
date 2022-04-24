@@ -1,89 +1,85 @@
-import 'package:advanced_form_generator/widgets/CustomLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class FormFieldItem extends StatelessWidget {
   late TextEditingController? controller;
   final TextInputAction? textInputAction;
+  late InputDecoration? decoration;
   final TextInputType textInputType;
-  final String hintText;
+  final TextStyle? style;
   final bool obscureText;
+  final bool readOnly;
+  final bool autocorrect;
+  final bool autofocus;
   final Function()? onTap;
   final Function(String val)? onChanged;
+  final void Function(String?)? onSaved;
+  final void Function()? onEditingComplete;
+  final void Function(String)? onFieldSubmitted;
   final bool required;
-  final bool isDisabled;
-  final String? error;
+  final bool enabled;
   final String label;
-  final String? counterText;
+  final String? hint;
   final int? maxLength;
-  final String? Function(String?, bool)? validator;
+  final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
-  final Icon? icon;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? margin;
-  final String? initialValue;
   final String mapKey;
+  final String? initialValue;
 
-  FormFieldItem(
-      {Key? key,
-      required this.label,
-      required this.mapKey,
-      this.textInputAction,
-      this.controller,
-      this.padding = const EdgeInsets.symmetric(horizontal: 16),
-      this.margin = const EdgeInsets.symmetric(vertical: 10),
-      this.textInputType = TextInputType.text,
-      this.hintText = '',
-      this.counterText = '',
-      this.required = false,
-      this.isDisabled = false,
-      this.obscureText = false,
-      this.maxLength,
-      this.validator,
-      this.error,
-      this.icon,
-      this.initialValue,
-      this.inputFormatters,
-      this.onTap,
-      this.onChanged})
-      : super(key: key);
+  /// Create a new FormFieldItem instance
+  ///
+  /// required [mapKey] is the key that will be used to save the value in the [Map] returned by [toMap] method in AdvancedFormGenerator instance
+  /// required [label] is the label of the field
+  FormFieldItem({
+    Key? key,
+    required this.label,
+    required this.mapKey,
+    this.hint,
+    this.textInputAction,
+    this.controller,
+    this.decoration,
+    this.style,
+    this.textInputType = TextInputType.text,
+    this.required = false,
+    this.enabled = true,
+    this.obscureText = false,
+    this.autofocus = false,
+    this.autocorrect = false,
+    this.readOnly = false,
+    this.initialValue,
+    this.maxLength,
+    this.validator,
+    this.onEditingComplete,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.inputFormatters,
+    this.onTap,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      margin: margin,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: Colors.grey[200]),
-      child: TextFormField(
-        controller: controller,
-        textInputAction: textInputAction,
-        keyboardType: textInputType,
-        obscureText: obscureText,
-        style: TextStyle(fontSize: 18, color: Colors.grey[900]),
-        onTap: onTap ?? () {},
-        maxLength: maxLength,
-        onChanged: onChanged,
-        enabled: isDisabled ? false : true,
-        validator: validator != null
-            ? (val) => validator!(val, required)
-            : defaultValidator,
-        inputFormatters: inputFormatters,
-        decoration: InputDecoration(
-            hintText: hintText,
-            label: CustomLabel(text: label),
-            border: InputBorder.none,
-            prefixIcon: icon,
-            counterText: "",
-            fillColor: Colors.transparent),
-      ),
+    return TextFormField(
+      controller: controller,
+      textInputAction: textInputAction,
+      keyboardType: textInputType,
+      obscureText: obscureText,
+      style: style ?? TextStyle(fontSize: 16, color: Colors.grey[900]),
+      onTap: onTap ?? () {},
+      maxLength: maxLength,
+      onChanged: onChanged,
+      enabled: enabled,
+      validator: validator,
+      autofocus: autofocus,
+      autocorrect: autocorrect,
+      initialValue: initialValue,
+      readOnly: readOnly,
+      inputFormatters: inputFormatters,
+      decoration: decoration,
+      onSaved: onSaved,
+      onEditingComplete: onEditingComplete,
+      onFieldSubmitted: onFieldSubmitted,
     );
-  }
-
-  String? defaultValidator(String? value) {
-    if (required == true && (value == null || value.isEmpty)) {
-      return error ?? 'Campo obrigatório';
-    }
-    return null;
   }
 }
