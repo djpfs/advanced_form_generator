@@ -1,10 +1,9 @@
 library advanced_form_generator;
 
-import 'package:advanced_form_generator/utils/DefaultInputDecoration.dart';
+import 'package:advanced_form_generator/utils/defaultInputDecoration.dart';
 import 'package:advanced_form_generator/widgets/FormFieldItem.dart';
+import 'package:advanced_form_generator/widgets/IFormFieldItem.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/IFormFieldItem.dart';
 
 class AdvancedFormGenerator {
   final List<dynamic> _fields = [];
@@ -29,7 +28,7 @@ class AdvancedFormGenerator {
   /// EdgeInsets.symmetric(vertical: 12)
   /// ```
   ///
-  /// you can change the [decoration] by passing a [InputDecoration], its default value is [DefaultInputDecoration]
+  /// you can change the [decoration] by passing a [InputDecoration], its default value is [defaultInputDecoration]
   ///
   /// you can change the [decoration] for single field by passing a [InputDecoration] to the FormFieldItem
   AdvancedFormGenerator(
