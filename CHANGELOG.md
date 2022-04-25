@@ -1,3 +1,11 @@
+## 0.0.4
+
+- Fixed bug
+
+```
+Failed assertion: line 155 pos 15: 'initialValue == null || controller == null': is not true.
+```
+
 ## 0.0.3
 
 - Fixed Importing Default InputDecoration

@@ -73,7 +73,6 @@ class FormFieldItem extends StatelessWidget {
       validator: validator,
       autofocus: autofocus,
       autocorrect: autocorrect,
-      initialValue: initialValue,
       readOnly: readOnly,
       inputFormatters: inputFormatters,
       decoration: decoration,
