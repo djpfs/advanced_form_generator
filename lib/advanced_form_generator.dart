@@ -6,9 +6,16 @@ import 'package:advanced_form_generator/widgets/IFormFieldItem.dart';
 import 'package:flutter/material.dart';
 
 class AdvancedFormGenerator {
+  /// List with all widgets
   final List<dynamic> _fields = [];
+
+  /// map of field names to [TextEditingController]
   final Map<String, dynamic> _form = {};
+
+  /// prefix for the map key of [FormFieldItem] and [IFormFieldItem]
   final String _fieldPrefix = 'field-';
+
+  /// prefix for the map key of custom widgets
   final String _customPrefix = 'custom-';
 
   /// This [margin] is used for all fields, if you want to change it for some field, you can pass it to the constructor of [FormFieldItem]
@@ -30,7 +37,7 @@ class AdvancedFormGenerator {
   ///
   /// you can change the [margin] by passing a [EdgeInsets], default is
   /// ```dart
-  /// EdgeInsets.symmetric(vertical: 12)
+  /// EdgeInsets.symmetric(vertical: 8)
   /// ```
   ///
   /// you can change the [decoration] by passing a [InputDecoration], its default value is [defaultInputDecoration]
@@ -58,13 +65,18 @@ class AdvancedFormGenerator {
       field.decoration = field.decoration ??
           defaultInputDecotation(hintText: field.hint, labeltext: field.label);
     } else {
+      /// Increment the number of custom widgets
+      _qtdItems++;
       _form[_customPrefix + _qtdItems.toString()] = field;
     }
-    _qtdItems++;
+
+    /// Add the field to the list
+    /// check if margin is null, if yes, use the default value
+    /// if not use the value passed in the constructor
     _fields.add(margin == null
         ? Container(
-            margin: const EdgeInsets.symmetric(vertical: 12), child: field)
-        : field);
+            margin: const EdgeInsets.symmetric(vertical: 8), child: field)
+        : Container(margin: margin, child: field));
   }
 
   /// Return a value from the input field with the [key]
@@ -83,11 +95,18 @@ class AdvancedFormGenerator {
       {bool ignoreEmpty = false, bool emptyToNull = false}) {
     Map<String, dynamic> json = {};
     for (var key in _form.keys) {
+      /// if is a custom widget, jump to the next one
       if (key.startsWith(_customPrefix)) continue;
+
+      /// if is a field, check if the field is empty and the [ignoreEmpty[] flag is true
       if (ignoreEmpty && _form[key]!.text.isEmpty) continue;
+
+      /// if is a field, check if the field is empty and the [emptyToNull] flag is true
       if (emptyToNull && _form[key]!.text.isEmpty) {
+        /// set a value to null
         json[key.replaceFirst(_fieldPrefix, '')] = null;
       } else {
+        /// get the value from [TextEditingController]
         json[key.replaceFirst(_fieldPrefix, '')] = _form[key]!.value.text;
       }
     }
@@ -96,8 +115,12 @@ class AdvancedFormGenerator {
 
   /// Resets all the [TextEditingController]s inside [FormFieldItem]s and [IFormFieldItem]s to empty
   void reset() {
+    /// For each key in the map
     for (var key in _form.keys) {
+      /// if is a custom widget, jump to the next one
       if (key.startsWith(_customPrefix)) continue;
+
+      /// reset the [TextEditingController]
       _form[key]!.clear();
     }
   }
@@ -105,6 +128,8 @@ class AdvancedFormGenerator {
   /// Returns a [List] with all the widgets to render
   List<Widget> render() {
     List<Widget> widgets = [];
+
+    /// For each field in _fields
     for (dynamic field in _fields) {
       if (field is FormFieldItem) {
         widgets.add(field);
