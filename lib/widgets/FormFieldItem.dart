@@ -65,7 +65,7 @@ class FormFieldItem extends StatelessWidget {
       textInputAction: textInputAction,
       keyboardType: textInputType,
       obscureText: obscureText,
-      style: style ?? TextStyle(fontSize: 16, color: Colors.grey[900]),
+      style: style ?? TextStyle(fontSize: 16, color: Colors.grey[800]),
       onTap: onTap ?? () {},
       maxLength: maxLength,
       onChanged: onChanged,

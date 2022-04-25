@@ -15,6 +15,7 @@ import 'package:advanced_form_generator/advanced_form_generator.dart';
 import 'package:advanced_form_generator/widgets/IFormFieldItem.dart';
 import 'package:flutter/material.dart';
 
+/// Example of a custom text input
 class CustomText extends StatelessWidget implements IFormFieldItem {
   @override
   TextEditingController? controller;
@@ -166,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 # Methods
 
-## **toMap()**
+## **toMap**
 
 Returns a [Map] with all the fields and their values
 
@@ -177,6 +178,8 @@ Returns a [Map] with all the fields and their values
 [emptyValue] - value to be used if [ignoreEmpty] is false and the field is empty - default: false
 
 [ignoreEmpty] and [emptyValue] if active together, only [ignoreEmpty] will be considere
+
+**Example**
 
 ```dart
 // Declare a form
@@ -203,9 +206,11 @@ AdvancedFormGenerator formGenerator = AdvancedFormGenerator(inputs: [
 */
 ```
 
-**render()**
+**render**
 
 Returns a [List] with all the widgets to render
+
+**Example**
 
 ```dart
 // Declare a form
@@ -239,9 +244,66 @@ Column(
 ...
 ```
 
-## reset()
+## reset
 
 Resets all the [TextEditingController]s inside [FormFieldItem]s and [IFormFieldItem]s to empty
+
+**Example**
+
+```dart
+AdvancedFormGenerator form = AdvancedFormGenerator(inputs: [
+      FormFieldItem(
+        label: 'E-mail',
+        required: true,
+        mapKey: 'email',
+        initialValue: 'test@email.com'
+      ),FormFieldItem(
+        label: 'Senha',
+        mapKey: 'password',
+      ),
+     ]);
+
+// before reset
+Map values = form.toMap();
+// {'email': 'test@email.com', password: ''}
+
+// after reset
+form.reset();
+values = form.toMap();
+// {'email': '', password: ''}
+
+```
+
+## **getValue**
+
+Return a value from the input field with the [key], if the key does not exist, null will be returned.
+
+**Parameters**
+
+[key] - required, is the same as the _mapKey_ property, passing the key you can get the individual value of a text field.
+
+**Example**
+
+```dart
+AdvancedFormGenerator form = AdvancedFormGenerator(inputs: [
+      FormFieldItem(
+        label: 'E-mail',
+        required: true,
+        mapKey: 'email',
+        initialValue: 'test@email.com'
+      ),FormFieldItem(
+        label: 'Senha',
+        mapKey: 'password',
+      ),
+     ]);
+
+String? email = form.getValue('email');
+// email = 'test@email.com'
+String? password = form.getValue('password');
+// password = ''
+String? other = form.getValue('other');
+// other = null
+```
 
 # How to create a custom FormFieldItem widget
 
@@ -290,7 +352,7 @@ class CustomText extends StatelessWidget implements IFormFieldItem {
 
 # How to change the style of [FormFieldItem]?
 
-You can do it individually, like this:
+You can do it individually, like this
 
 ```
 FormFieldItem(
@@ -307,7 +369,7 @@ FormFieldItem(
       )
 ```
 
-or for all:
+or for all
 
 ```
 AdvancedFormGenerator formGenerator = AdvancedFormGenerator(inputs: [

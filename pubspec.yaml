@@ -1,6 +1,6 @@
 name: advanced_form_generator
 description: Use a simple and easy structure to create forms simple to manage and no time wasted
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/djpfs/advanced_form_generator.git
 
 environment:

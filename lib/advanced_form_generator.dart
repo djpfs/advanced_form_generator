@@ -10,9 +10,14 @@ class AdvancedFormGenerator {
   final Map<String, dynamic> _form = {};
   final String _fieldPrefix = 'field-';
   final String _customPrefix = 'custom-';
+
+  /// This [margin] is used for all fields, if you want to change it for some field, you can pass it to the constructor of [FormFieldItem]
   final EdgeInsets? margin;
+
+  /// This [decoration] is used for all fields, if you want to change it for some field, you can pass it to the constructor of [FormFieldItem]
   final InputDecoration? decoration;
 
+  /// Number of custom widgets in the form, used to generate unique keys to custom widgets
   int _qtdItems = 0;
 
   /// Create a new AdvancedFormGenerator instance
@@ -38,8 +43,13 @@ class AdvancedFormGenerator {
     }
   }
 
+  /// Returns all widgets that were passed in the AdvancedFormGenerator initialization
   get getFields => _fields;
 
+  /// Add a widget to [_fields], used internally
+  ///
+  /// if [field] is a [FormFieldItem] or [IFormFieldItem], a TextEditingController will be dynamically created for it
+  /// else it will be added to [_fields]
   _addField(dynamic field) {
     if (field is FormFieldItem || field is IFormFieldItem) {
       _form[_fieldPrefix + field.mapKey] =
@@ -55,6 +65,11 @@ class AdvancedFormGenerator {
         ? Container(
             margin: const EdgeInsets.symmetric(vertical: 12), child: field)
         : field);
+  }
+
+  /// Return a value from the input field with the [key]
+  String? getValue(String key) {
+    return _form[key]?.text;
   }
 
   /// Returns a [Map] with all the fields and their values

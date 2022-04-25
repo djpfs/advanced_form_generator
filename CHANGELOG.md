@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Add a method _`getValue(String key) `_ to get a value from a single text components
+
 ## 0.0.4
 
 - Fixed bug
