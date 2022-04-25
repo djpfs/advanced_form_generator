@@ -4,7 +4,7 @@
 
 In the `dependencies:` section of your _pubspec.yaml_ , add the following line:
 
-`advanced_form_generator: ^0.0.2`
+`advanced_form_generator: ^0.0.5`
 
 # Usage
 
