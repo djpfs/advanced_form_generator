@@ -1,3 +1,7 @@
+## 0.0.7
+
+- Bug fix: `getValue` returning a null for all
+
 ## 0.0.6
 
 - Bug fix that does not change the margin on the form

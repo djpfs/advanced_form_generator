@@ -81,7 +81,7 @@ class AdvancedFormGenerator {
 
   /// Return a value from the input field with the [key]
   String? getValue(String key) {
-    return _form[key]?.text;
+    return _form['$_fieldPrefix$key']?.text;
   }
 
   /// Returns a [Map] with all the fields and their values
