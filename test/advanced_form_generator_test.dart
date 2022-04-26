@@ -25,4 +25,16 @@ void main() {
     final form = AdvancedFormGenerator(inputs: formFields);
     expect(form.toMap(), {'test': 'test'});
   });
+  test('test getValue method', () {
+    final List<dynamic> formFields = [
+      FormFieldItem(
+        label: 'test',
+        mapKey: 'test',
+        initialValue: 'test value',
+      ),
+    ];
+    final form = AdvancedFormGenerator(inputs: formFields);
+    expect(form.getValue('test'), 'test value');
+    expect(form.getValue('test2'), null);
+  });
 }
