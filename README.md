@@ -299,6 +299,39 @@ String? other = form.getValue('other');
 // other = null
 ```
 
+## **setValue**
+
+Sets a value to the text input if the key passed is valid.
+
+**Parameters**
+
+[key] - required, is the same as the _mapKey_ property, passing the key you can get the individual value of a text field.
+
+[value] - required, is a string field and will be the new value of the text inputis.
+
+**Example**
+
+```dart
+AdvancedFormGenerator form = AdvancedFormGenerator(inputs: [
+      FormFieldItem(
+        label: 'E-mail',
+        required: true,
+        mapKey: 'email',
+        initialValue: 'test@email.com'
+      ),FormFieldItem(
+        label: 'Senha',
+        mapKey: 'password',
+      ),
+     ]);
+
+String? email = form.getValue('email');
+// email = 'test@email.com'
+form.setValue('email', 'email@email.com');
+email = form.getValue('email');
+// email = 'email@email.com'
+
+```
+
 # How to create a custom FormFieldItem widget
 
 ```dart
@@ -348,7 +381,7 @@ class CustomText extends StatelessWidget implements IFormFieldItem {
 
 You can do it individually, like this
 
-```
+```dart
 FormFieldItem(
         label: 'E-mail',
         required: true,
@@ -365,7 +398,7 @@ FormFieldItem(
 
 or for all
 
-```
+```dart
 AdvancedFormGenerator formGenerator = AdvancedFormGenerator(inputs: [
       FormFieldItem(
         label: 'E-mail',

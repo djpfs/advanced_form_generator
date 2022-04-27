@@ -84,6 +84,13 @@ class AdvancedFormGenerator {
     return _form['$_fieldPrefix$key']?.text;
   }
 
+  /// if the [key] exists, set a value to the input field with the [key],
+  void setValue(String key, String value) {
+    if (_form.containsKey('$_fieldPrefix$key')) {
+      _form['$_fieldPrefix$key']?.text = value;
+    }
+  }
+
   /// Returns a [Map] with all the fields and their values
   ///
   /// [ignoreEmpty] - if true, will ignore empty fields - default: false

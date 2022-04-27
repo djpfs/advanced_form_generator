@@ -37,4 +37,16 @@ void main() {
     expect(form.getValue('test'), 'test value');
     expect(form.getValue('test2'), null);
   });
+  test('test setValue method', () {
+    final List<dynamic> formFields = [
+      FormFieldItem(
+        label: 'test',
+        mapKey: 'test',
+        initialValue: 'test value',
+      ),
+    ];
+    final form = AdvancedFormGenerator(inputs: formFields);
+    form.setValue('test', 'new value');
+    expect(form.getValue('test'), 'new value');
+  });
 }

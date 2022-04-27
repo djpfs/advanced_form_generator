@@ -1,3 +1,7 @@
+## 0.0.8
+
+- Add a method _`setValue(String key, String value) `_ to set a value to a single text components
+
 ## 0.0.7
 
 - Bug fix: `getValue` returning a null for all
